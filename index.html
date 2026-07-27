@@ -356,7 +356,8 @@
             background-position: center;
             background-repeat: no-repeat;
             background-size: 60%;
-            /* Tamaño de la constelación en el cielo */
+            /* Brillo uniforme e intenso */
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) drop-shadow(0 0 20px rgba(255, 255, 255, 1));
         }
 
         @media (max-width: 600px) {
@@ -365,24 +366,21 @@
             }
         }
 
-        #constellation-bg.show-aries {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="70" r="1.5" fill="white" filter="blur(1px)"/><circle cx="50" cy="50" r="1.5" fill="white"/><circle cx="70" cy="60" r="1.5" fill="white"/><circle cx="90" cy="30" r="2" fill="white" filter="drop-shadow(0 0 5px white)"/><polyline points="20,70 50,50 70,60 90,30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/></svg>');
-            opacity: 0.6;
+        /* Clases reutilizables para los SVGs */
+        .svg-aries {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="70" r="3" fill="white"/><circle cx="50" cy="50" r="2.5" fill="white"/><circle cx="70" cy="60" r="2" fill="white"/><circle cx="90" cy="30" r="4" fill="white"/><polyline points="20,70 50,50 70,60 90,30" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/></svg>');
         }
 
-        #constellation-bg.show-taurus {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="1.5" fill="white"/><circle cx="40" cy="50" r="1.5" fill="white"/><circle cx="60" cy="50" r="2" fill="white" filter="blur(1px)"/><circle cx="80" cy="30" r="1.5" fill="white"/><circle cx="50" cy="80" r="1.5" fill="white"/><polyline points="20,30 40,50 50,80 60,50 80,30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/><polyline points="40,50 60,50" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/></svg>');
-            opacity: 0.6;
+        .svg-taurus {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="3" fill="white"/><circle cx="40" cy="50" r="2" fill="white"/><circle cx="60" cy="50" r="4" fill="white"/><circle cx="80" cy="30" r="2.5" fill="white"/><circle cx="50" cy="80" r="3" fill="white"/><polyline points="20,30 40,50 50,80 60,50 80,30" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/><polyline points="40,50 60,50" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/></svg>');
         }
 
-        #constellation-bg.show-gemini {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="30" cy="20" r="1.5" fill="white" filter="blur(1px)"/><circle cx="70" cy="25" r="1.5" fill="white"/><circle cx="25" cy="50" r="1.5" fill="white"/><circle cx="65" cy="55" r="1.5" fill="white"/><circle cx="20" cy="80" r="1.5" fill="white"/><circle cx="60" cy="85" r="1.5" fill="white"/><polyline points="30,20 25,50 20,80" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/><polyline points="70,25 65,55 60,85" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/><polyline points="30,20 70,25" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/><polyline points="20,80 60,85" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/></svg>');
-            opacity: 0.6;
+        .svg-gemini {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="30" cy="20" r="3" fill="white"/><circle cx="70" cy="25" r="3" fill="white"/><circle cx="25" cy="50" r="2" fill="white"/><circle cx="65" cy="55" r="2.5" fill="white"/><circle cx="20" cy="80" r="3" fill="white"/><circle cx="60" cy="85" r="3" fill="white"/><polyline points="30,20 25,50 20,80" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/><polyline points="70,25 65,55 60,85" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/><polyline points="30,20 70,25" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><polyline points="20,80 60,85" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/></svg>');
         }
 
-        #constellation-bg.show-cancer {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="30" cy="80" r="1.5" fill="white"/><circle cx="50" cy="50" r="1.5" fill="white"/><circle cx="40" cy="30" r="2" fill="white" filter="blur(1px)"/><circle cx="70" cy="20" r="1.5" fill="white"/><polyline points="30,80 50,50 40,30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/><polyline points="50,50 70,20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/></svg>');
-            opacity: 0.6;
+        .svg-cancer {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="30" cy="80" r="3" fill="white"/><circle cx="50" cy="50" r="2" fill="white"/><circle cx="40" cy="30" r="4" fill="white"/><circle cx="70" cy="20" r="2.5" fill="white"/><polyline points="30,80 50,50 40,30" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/><polyline points="50,50 70,20" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/></svg>');
         }
 
         .constellation-date {
@@ -390,6 +388,27 @@
             color: #ffb3d9;
             margin-bottom: 10px;
             font-style: italic;
+        }
+
+        #constellation-bg.pos-left {
+            background-position: 5% center;
+            background-size: 30%;
+            opacity: 1;
+        }
+
+        #constellation-bg.pos-right {
+            background-position: 95% center;
+            background-size: 30%;
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+
+            #constellation-bg.pos-left,
+            #constellation-bg.pos-right {
+                background-position: center top 15%;
+                background-size: 50%;
+            }
         }
 
         /* --- BOTÓN ESTELAR (Celebremos juntos) --- */
@@ -409,6 +428,42 @@
             z-index: 20;
             outline: none;
             transition: opacity 0.5s;
+        }
+
+        #celebrate-btn::before,
+        #celebrate-btn::after {
+            content: '✨';
+            position: absolute;
+            font-size: 2rem;
+            animation: orbit 3s linear infinite;
+        }
+
+        #celebrate-btn::before {
+            top: -10px;
+            left: -20px;
+        }
+
+        #celebrate-btn::after {
+            bottom: -10px;
+            right: -20px;
+            animation-direction: reverse;
+        }
+
+        @keyframes orbit {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.3) rotate(180deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1) rotate(360deg);
+                opacity: 0.8;
+            }
         }
 
         .celebrate-hidden {
@@ -548,6 +603,111 @@
                 opacity: 0;
             }
         }
+
+        /* Mensaje Final Fase 4 */
+        .final-message {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 2s ease-in-out, transform 2s ease-in-out;
+            text-align: center;
+        }
+
+        .date-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .love-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: #ffb3d9;
+            text-shadow: 0 0 15px #ffb3d9, 0 0 30px #ffb3d9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            white-space: nowrap;
+        }
+
+        .love-text span {
+            font-size: 1.2em;
+            animation: pulse-stellar 2s infinite;
+        }
+
+        /* Animación flotante para las cartas dispersas */
+        @keyframes float-card {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(3deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .date-text {
+                font-size: 1.4rem;
+                margin-bottom: 25px;
+            }
+
+            .love-text {
+                font-size: 1.8rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .love-text span {
+                font-size: 1.5em;
+            }
+        }
+
+        /* Contenedor Constelaciones Fase 1 */
+        #phase1-constellations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+            transition: opacity 1.5s ease;
+        }
+
+        .random-constellation {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0;
+            animation: fade-in-out 6s ease-in-out forwards;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+        }
+
+        @keyframes fade-in-out {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+        }
     </style>
 </head>
 
@@ -557,6 +717,9 @@
     <div class="stars"></div>
     <div class="twinkling"></div>
 
+    <!-- Contenedor Constelaciones Fase 1 -->
+    <div id="phase1-constellations"></div>
+
     <!-- Contenedor del fondo de la constelación -->
     <div id="constellation-bg"></div>
 
@@ -564,10 +727,10 @@
         <!-- Fase 1: Texto y botón de entrada -->
         <div id="phase1">
             <h1 class="floating-text">
-                hola mi amorcito, hoy es ya un mes desde que pude decirte cuanto te queria y sobre todo pedirte estar
-                conmigo por mucho tiempo mas, dale al boton para ver la magia
+                Hola mi amorcito, hoy es ya un mes desde que pude decirte cuánto te quería y sobre todo pedirte estar
+                conmigo por mucho tiempo más, dale al botón para ver la magia.
             </h1>
-            <button class="magic-btn" onclick="showMagic(event)">(presioname)</button>
+            <button class="magic-btn" onclick="showMagic(event)">⭐⭐</button>
         </div>
     </div>
 
@@ -586,9 +749,9 @@
                         </div>
                         <div class="card-back">
                             <div class="constellation-date">27 de Junio</div>
-                            <p>Esta pulserita que te mande a hacer con mucho amor representa algunas cosas que hemos
-                                hecho, nuestras citas, nuestros bombones, lo importante que eres para mi, y algo que
-                                solo tu y yo podemos entender</p>
+                            <p>Esta pulserita que te mandé a hacer con mucho amor representa algunas cosas que hemos
+                                hecho, nuestras citas, nuestros bombones, lo importante que eres para mí, y algo que
+                                solo tú y yo podemos entender.</p>
                         </div>
                     </div>
                 </div>
@@ -601,8 +764,8 @@
                         </div>
                         <div class="card-back">
                             <div class="constellation-date">27 de Junio</div>
-                            <p>Bueno al menos tuvimos una vista bonita no? aun que estaba nervioso, pero ahora ese lago
-                                es muy especial para mi, te quiero mucho mi amor </p>
+                            <p>Bueno al menos tuvimos una vista bonita ¿no? aunque estaba nervioso, pero ahora ese lago
+                                es muy especial para mí, te quiero mucho mi amor.</p>
                         </div>
                     </div>
                 </div>
@@ -615,9 +778,10 @@
                         </div>
                         <div class="card-back">
                             <div class="constellation-date">4 de Junio</div>
-                            <p>Esta cita, o mejor dicho, sorpresa fue muy linda, no sabia de donde ibas a salir! pero al
+                            <p>Esta cita, o mejor dicho, sorpresa fue muy linda, ¡no sabía de dónde ibas a salir! pero
+                                al
                                 final pude darte algo que te cuide, y demostrarte que siempre te voy a proteger y a
-                                cuidarte. </p>
+                                cuidarte.</p>
                         </div>
                     </div>
                 </div>
@@ -630,8 +794,8 @@
                         </div>
                         <div class="card-back">
                             <div class="constellation-date">4 de Junio</div>
-                            <p>Y despues de esa maravilla de sorpresa nos pudimos ir un ratillo juntos! y nos dejaron
-                                encerrados en el hotel y tu y yo yo tipo nimodo, a salir por el parqueadero jaja.</p>
+                            <p>¡Y después de esa maravilla de sorpresa nos pudimos ir un ratillo juntos! y nos dejaron
+                                encerrados en el hotel y tú y yo tipo ni modo, a salir por el parqueadero jaja.</p>
                         </div>
                     </div>
                 </div>
@@ -644,8 +808,8 @@
                         </div>
                         <div class="card-back">
                             <div class="constellation-date">2 de Mayo</div>
-                            <p>Nuestra segunda cita, es una de mis fotos favoritas, aun que debemos sacarnos mas, fue
-                                linda por que sostuve tu manito durante todo el tiempo, y te pude sentir, ahi fue
+                            <p>Nuestra segunda cita, es una de mis fotos favoritas, aunque debemos sacarnos más, fue
+                                linda porque sostuve tu manito durante todo el tiempo, y te pude sentir, ¡ahí fue
                                 nuestro primer besito!</p>
                         </div>
                     </div>
@@ -660,8 +824,8 @@
                         <div class="card-back">
                             <div class="constellation-date">13 de Junio</div>
                             <p>Mira, tengo como un tesoro el llaverito y el termo que me diste, lo chistoso es que cada
-                                que me acuerdo que dijiste que combinaba conmigo siempre me reviso y estoy usando el
-                                mismo color de oufit! asi que tienes razon</p>
+                                que me acuerdo que dijiste que combinaba conmigo siempre me reviso y ¡estoy usando el
+                                mismo color de outfit! así que tienes razón.</p>
                         </div>
                     </div>
                 </div>
@@ -674,10 +838,10 @@
                         </div>
                         <div class="card-back">
                             <div class="constellation-date">4 de Julio</div>
-                            <p>No tomamos fotos de ese dia mas que esta, me acompañaste en un momento muy complicado
-                                para mi, me ayudaste a llorar, me abrazaste y me hiciste sentir que no estaba solo, no
-                                sabes lo mucho que significo eso para mi, en definitiva puedo estar seguro de mis
-                                sentimientos por ti</p>
+                            <p>No tomamos fotos de ese día más que esta, me acompañaste en un momento muy complicado
+                                para mí, me ayudaste a llorar, me abrazaste y me hiciste sentir que no estaba solo, no
+                                sabes lo mucho que significó eso para mí, en definitiva puedo estar seguro de mis
+                                sentimientos por ti.</p>
                         </div>
                     </div>
                 </div>
@@ -690,9 +854,9 @@
                         </div>
                         <div class="card-back">
                             <div class="constellation-date">25 de Mayo</div>
-                            <p>Este osito que pinte en nuestra primera cita, que admito, lo iba cuidando en el metro
-                                como el tesoro que es, ademas le puse tu inicial para acordarme siempre a quien le
-                                pertenece mi corazon</p>
+                            <p>Este osito que pinté en nuestra primera cita, que admito, lo iba cuidando en el metro
+                                como el tesoro que es, además le puse tu inicial para acordarme siempre a quién le
+                                pertenece mi corazón.</p>
                         </div>
                     </div>
                 </div>
@@ -705,9 +869,9 @@
                         </div>
                         <div class="card-back">
                             <div class="constellation-date">25 de Mayo</div>
-                            <p>Solo puedo decir, nunca me voy a olvidar lo hermosa que estabas ese dia, creeme que es de
-                                los sentimientos mas raros que tengo, pero, de una forma, mi corazon simplemente supo
-                                quien eras y lo mucho que te iba a querer, mi niña.</p>
+                            <p>Solo puedo decir, nunca me voy a olvidar lo hermosa que estabas ese día, créeme que es de
+                                los sentimientos más raros que tengo, pero, de una forma, mi corazón simplemente supo
+                                quién eras y lo mucho que te iba a querer, mi niña.</p>
                         </div>
                     </div>
                 </div>
@@ -721,8 +885,8 @@
                         <div class="card-back">
                             <div class="constellation-date">15 de Abril</div>
                             <p>Bueno con esta fotito pude haberte dado un infarto jaja me disculpo por eso, pero ey, si
-                                no hubiera pasado eso, no estuvieramos aqui, en definitiva en otra vida jure encontrarte
-                                mi amorcito</p>
+                                no hubiera pasado eso, no estuviéramos aquí, en definitiva en otra vida juré encontrarte
+                                mi amorcito.</p>
                         </div>
                     </div>
                 </div>
@@ -735,8 +899,8 @@
                         </div>
                         <div class="card-back">
                             <div class="constellation-date">25 de Mayo</div>
-                            <p>Estaba en el bus con estas flores y mucha gente me quedo viendo raro, no sabia como ibas
-                                a reaccionar o si era exagerado un ramo asi en la primera cita, solo me nacio dartelas
+                            <p>Estaba en el bus con estas flores y mucha gente me quedó viendo raro, no sabía cómo ibas
+                                a reaccionar o si era exagerado un ramo así en la primera cita, solo me nació dártelas.
                             </p>
                         </div>
                     </div>
@@ -745,24 +909,37 @@
         </div>
 
         <!-- Botón que aparece al voltear todas las fotos -->
-        <button id="celebrate-btn" onclick="startPhase3()">celebremos juntos!</button>
+        <button id="celebrate-btn" onclick="startPhase3()">¡Celebremos juntos!</button>
     </div>
 
     <!-- Fase 3: Preguntas -->
     <div id="phase3">
         <div class="question-box">
             <h3>¿Qué quieres comer?</h3>
-            <!-- Cambia estas opciones manualmente -->
-            <button class="option-btn" onclick="selectOption(this)">Opción de comida 1 (Ej. Sushi)</button>
-            <button class="option-btn" onclick="selectOption(this)">Opción de comida 2 (Ej. Pizza)</button>
-            <button class="option-btn" onclick="selectOption(this)">Opción de comida 3 (Ej. Tacos)</button>
+            <button class="option-btn" onclick="selectOption(this, 'food')">Comida coreana</button>
+            <button class="option-btn" onclick="selectOption(this, 'food')">Opción sorpresa</button>
         </div>
 
         <div class="question-box">
             <h3>¿Qué tan emocionada estás?</h3>
-            <button class="option-btn" onclick="selectOption(this)">Muchísimo ❤️</button>
-            <button class="option-btn" onclick="selectOption(this)">¡Demasiado! ✨</button>
-            <button class="option-btn" onclick="selectOption(this)">No puedo esperar más 🥰</button>
+            <button class="option-btn" onclick="selectOption(this, 'emotion')">Muchísimo</button>
+            <button class="option-btn" onclick="selectOption(this, 'emotion')">No puedo esperar más</button>
+        </div>
+
+        <button id="confirm-btn" class="magic-btn"
+            style="display: none; margin-top: 20px; font-size: 1.5rem; opacity: 0; transition: opacity 1s;"
+            onclick="startPhase4()">¿Confirmar cita?</button>
+    </div>
+
+    <!-- Fase 4: Final -->
+    <div id="phase4"
+        style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); z-index:50; text-align:center; width:100%; pointer-events: auto;">
+        <div class="final-message">
+            <div class="date-text">Es una cita, sábado 1 de agosto 1 pm</div>
+            <div class="love-text"><span>❤️</span> TE QUIERO MUCHO CATALINA <span>❤️</span></div>
+            <button id="reset-btn" class="magic-btn"
+                style="margin-top: 50px; font-size: 1.2rem; opacity: 0; transition: opacity 1s;"
+                onclick="resetExperience()">⭐ Volver al inicio ⭐</button>
         </div>
     </div>
 
@@ -795,11 +972,47 @@
             }
         }, 4000);
 
-
-        // --- 2. Transición Fase 1 a Fase 2 ---
+        // --- 2. Estado Global ---
         let interactiveMode = false;
 
+        // --- Constelaciones Aleatorias Fase 1 ---
+        const constellationTypes = ['svg-aries', 'svg-taurus', 'svg-gemini', 'svg-cancer'];
+        let phase1Interval;
+
+        function spawnRandomConstellation() {
+            if (interactiveMode) return;
+
+            const container = document.getElementById('phase1-constellations');
+            const div = document.createElement('div');
+            div.className = 'random-constellation ' + constellationTypes[Math.floor(Math.random() * constellationTypes.length)];
+
+            // Random position evitando el centro (20vw-80vw, 30vh-70vh es la zona de texto/botón)
+            let x, y;
+            let attempts = 0;
+            do {
+                x = Math.random() * 80; // 0 to 80vw
+                y = Math.random() * 80; // 0 to 80vh
+                attempts++;
+            } while (x > 20 && x < 60 && y > 30 && y < 70 && attempts < 50);
+
+            div.style.left = x + 'vw';
+            div.style.top = y + 'vh';
+            div.style.width = '20vw';
+            div.style.height = '20vw';
+
+            container.appendChild(div);
+
+            setTimeout(() => div.remove(), 6000);
+        }
+
+        phase1Interval = setInterval(spawnRandomConstellation, 1800);
+        spawnRandomConstellation(); // Una inicial
+
+        // --- 2. Transición Fase 1 a Fase 2 ---
         function showMagic(event) {
+            clearInterval(phase1Interval); // Detener estrellas aleatorias
+            document.getElementById('phase1-constellations').style.opacity = '0';
+
             createSparkles(event.clientX, event.clientY, 30);
 
             const phase1 = document.getElementById('phase1');
@@ -843,7 +1056,7 @@
         }, { passive: true });
 
         document.addEventListener('touchmove', (e) => {
-            if (interactiveMode) {
+            if (interactiveMode && isTouching) {
                 const touchX = e.touches[0].clientX;
                 const deltaX = touchX - lastTouchX;
                 // Sensibilidad de arrastre (inversa para que siga el dedo)
@@ -853,6 +1066,10 @@
             }
         }, { passive: true });
 
+        document.addEventListener('touchend', (e) => {
+            isTouching = false;
+        }, { passive: true });
+
         function updateCarouselTransform() {
             const carousel = document.getElementById('carousel');
             if (carousel) {
@@ -860,16 +1077,26 @@
             }
         }
 
-        // Bucle de animación para rotación continua hacia la dirección del mouse (Solo Mouse)
+        // Bucle de animación para rotación continua hacia la dirección del mouse
         function animateCarousel() {
-            if (interactiveMode && !isTouching) {
-                const centerX = window.innerWidth / 2;
-                const distance = mouseX - centerX;
-                // Velocidad basada en qué tan lejos del centro está el cursor
-                const speed = distance / 150;
+            if (window.phase4Active) return; // Detener totalmente en fase 4
 
-                // Si movemos el mouse a la izquierda, la velocidad es negativa y el carrusel gira al revés, etc.
-                currentRotation -= speed;
+            if (window.phase3Active) {
+                // Rotación automática, elegante y constante
+                currentRotation -= 0.12;
+                updateCarouselTransform();
+            } else if (interactiveMode) {
+                if (!isTouching) {
+                    const centerX = window.innerWidth / 2;
+                    const distance = mouseX - centerX;
+
+                    // Rotación automática base muy leve + Velocidad basada en el cursor
+                    const baseSpeed = 0.08;
+                    const speed = baseSpeed + (distance / 200);
+
+                    // Si movemos el mouse a la izquierda, la rotación puede invertirse suavemente
+                    currentRotation -= speed;
+                }
                 updateCarouselTransform();
             }
             requestAnimationFrame(animateCarousel);
@@ -881,6 +1108,12 @@
         let phase3Unlocked = false;
 
         function flipCard(card, constellation) {
+            if (window.phase4Active) return; // Deshabilitar click en fase 4
+
+            const cards = Array.from(document.querySelectorAll('.carousel-item'));
+            const index = cards.indexOf(card);
+            const isLeft = index % 2 === 0;
+
             card.classList.toggle('flipped');
             const bg = document.getElementById('constellation-bg');
 
@@ -889,7 +1122,8 @@
                 // Iluminar la constelación en el fondo
                 bg.className = ''; // Limpiar anteriores
                 void bg.offsetWidth; // Reflow
-                bg.classList.add('show-' + constellation);
+                bg.classList.add('svg-' + constellation);
+                bg.classList.add(isLeft ? 'pos-left' : 'pos-right');
             } else {
                 flippedCards.delete(card);
                 // Si la cerramos, apagamos la constelación
@@ -910,6 +1144,7 @@
 
         // --- 5. Transición Fase 2 a Fase 3 ---
         function startPhase3() {
+            window.phase3Active = true;
             const btn = document.getElementById('celebrate-btn');
             btn.classList.add('celebrate-hidden');
 
@@ -928,15 +1163,106 @@
             }, 500);
         }
 
-        // Interacción simple para los botones de las opciones
-        function selectOption(btn) {
-            // Quitar clase selected a los hermanos
+        // Interacción para opciones y desbloqueo de confirmar
+        let selections = { food: false, emotion: false };
+        function selectOption(btn, type) {
             const siblings = btn.parentElement.querySelectorAll('.option-btn');
             siblings.forEach(s => s.classList.remove('selected'));
+            siblings.forEach(s => s.style.background = 'rgba(255, 255, 255, 0.05)');
 
-            // Añadir al clickeado
             btn.classList.add('selected');
-            btn.style.background = 'rgba(255, 255, 255, 0.4)'; // feedback visual directo
+            btn.style.background = 'rgba(255, 255, 255, 0.4)';
+
+            selections[type] = true;
+
+            if (selections.food && selections.emotion) {
+                const cBtn = document.getElementById('confirm-btn');
+                if (cBtn.style.display === 'none') {
+                    cBtn.style.display = 'block';
+                    void cBtn.offsetWidth;
+                    cBtn.style.opacity = '1';
+                }
+            }
+        }
+
+        // --- 6. Fase 4 El Gran Final ---
+        function startPhase4() {
+            window.phase4Active = true;
+
+            // Ocultar Fase 3
+            const phase3 = document.getElementById('phase3');
+            phase3.style.opacity = '0';
+            setTimeout(() => { phase3.style.display = 'none'; }, 1500);
+
+            // Bajar el carrusel y separar cartas
+            const carouselContainer = document.getElementById('carousel-container');
+            const mainTitle = document.getElementById('main-title');
+            carouselContainer.classList.remove('carousel-shifted');
+            mainTitle.style.opacity = '0';
+
+            const carousel = document.getElementById('carousel');
+            // Reset base rotation
+            carousel.style.transform = `translateZ(calc(var(--tz) * -1)) rotateY(0deg)`;
+
+            const items = document.querySelectorAll('.carousel-item');
+
+            // Posiciones personalizadas (vw, vh, rotation) para distribuir las 11 cartas
+            const finalPositions = [
+                { x: -50, y: -25, r: -8 },
+                { x: 50, y: -30, r: 12 },
+                { x: -70, y: -5, r: -4 },
+                { x: 65, y: 5, r: -8 },
+                { x: -45, y: 15, r: 10 },
+                { x: 55, y: 35, r: -5 },
+                { x: -65, y: 35, r: -12 },
+                { x: 75, y: 25, r: 12 },
+                { x: -35, y: -45, r: 5 },
+                { x: 45, y: -40, r: -8 },
+                { x: -60, y: 45, r: -10 }
+            ];
+
+            items.forEach((item, index) => {
+                item.style.transition = 'transform 2.5s cubic-bezier(0.25, 1, 0.5, 1)';
+
+                // Mover a sus posiciones personalizadas en los bordes
+                const pos = finalPositions[index];
+                item.style.transform = `translateX(${pos.x}vw) translateY(${pos.y}vh) rotateZ(${pos.r}deg)`;
+
+                // Mostrar frente y añadir animación flotante
+                const inner = item.querySelector('.card-inner');
+                inner.style.transition = 'transform 1.5s ease';
+                inner.style.transform = 'rotateY(0deg)'; // Quitar flip si lo tiene
+
+                // Delay flotante para que se vea orgánico
+                setTimeout(() => {
+                    const randomDuration = 3 + Math.random() * 3;
+                    inner.style.animation = `float-card ${randomDuration}s ease-in-out infinite`;
+                }, 1500);
+            });
+
+            // Mostrar constelación central muy grande y brillante
+            const bg = document.getElementById('constellation-bg');
+            bg.className = ''; // Limpiar pos-left/right
+            void bg.offsetWidth;
+            bg.classList.add('svg-gemini'); // Constelación romántica representativa
+            bg.style.backgroundPosition = 'center';
+            bg.style.backgroundSize = '80%';
+            bg.style.opacity = '0.7';
+
+            // Mostrar mensaje final
+            const p4 = document.getElementById('phase4');
+            p4.style.display = 'block';
+            setTimeout(() => {
+                const msg = p4.querySelector('.final-message');
+                msg.style.opacity = '1';
+                msg.style.transform = 'scale(1)';
+                createSparkles(window.innerWidth / 2, window.innerHeight / 2, 80);
+                setTimeout(() => { document.getElementById('reset-btn').style.opacity = '1'; }, 2000);
+            }, 1000);
+        }
+
+        function resetExperience() {
+            window.location.reload();
         }
     </script>
 </body>
