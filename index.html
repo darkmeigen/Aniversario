@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorpresa de Aniversario</title>
+    <!-- Importando fuentes de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Paleta de colores para la noche mágica */
+            --night-dark: #070913;
+            --night-purple: #1b1633;
+            --night-blue: #0f1936;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            /* Ocultamos los scrollbars para mantener inmersión */
+            background: linear-gradient(135deg, var(--night-dark) 0%, var(--night-purple) 50%, var(--night-blue) 100%);
+            font-family: 'Playfair Display', serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        /* Fondo de estrellas estático */
+        .stars,
+        .twinkling {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Generando estrellas con SVG incrustado */
+        .stars {
+            background: #000 url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMTUwIiBjeT0iMTUwIiByPSIxLjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIxODAiIGN5PSI0MCIgcj0iMC41IiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMjAiIGN5PSIxODAiIHI9IjEiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI5MCIgY3k9IjEwIiByPSIxLjIiIGZpbGw9IiNmZmYiLz48L3N2Zz4=') repeat top center;
+            opacity: 0.6;
+        }
+
+        /* Capa de estrellas animadas (efecto de movimiento muy sutil) */
+        .twinkling {
+            background: transparent url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48Y2lyY2xlIGN4PSIyMTAiIGN5PSIzMTAiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC44KSIvPjxjaXJjbGUgY3g9IjI1IiBjeT0iNzUiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC44KSIvPjxjaXJjbGUgY3g9IjM3NSIgY3k9IjEyNSIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjgpIi8+PC9zdmc+') repeat top center;
+            animation: move-twink-back 250s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes move-twink-back {
+            from { background-position: 0 0; }
+            to { background-position: -10000px 5000px; }
+        }
+
+        /* Contenedor principal por encima del fondo */
+        #content-container {
+            z-index: 10;
+            position: relative;
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FASE 1: Texto y Botón --- */
+        #phase1 {
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .floating-text {
+            font-size: 1.8rem;
+            line-height: 1.7;
+            margin-bottom: 50px;
+            /* Animación de flotar continuamente */
+            animation: float 4s ease-in-out infinite;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+        }
+
+        @media (max-width: 600px) {
+            .floating-text {
+                font-size: 1.4rem;
+                padding: 0 10px;
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .magic-btn {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 14px 35px;
+            border-radius: 40px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
+            /* Brillo o pulso sutil */
+            animation: pulse 2.5s infinite;
+            outline: none;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .magic-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #fff;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        /* --- FASE 2: Carrusel --- */
+        #phase2 {
+            display: none;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 15;
+        }
+
+        .title-great-vibes {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 10px #ffb3d9;
+            margin-bottom: 20px;
+            margin-top: -60px;
+            /* Ajuste visual */
+        }
+
+        @media (max-width: 600px) {
+            .title-great-vibes {
+                font-size: 3rem;
+                margin-top: -20px;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Carrusel 3D Rotativo */
+        .carousel-container {
+            width: 250px;
+            height: 350px;
+            position: relative;
+            perspective: 1200px;
+            --tz: 480px; /* Radio del carrusel */
+            margin-top: 20px; 
+            transition: transform 1.5s ease-in-out; /* Para la animación hacia Fase 3 */
+        }
+
+        .carousel-shifted {
+            transform: translateY(-20vh) scale(0.85);
+        }
+
+        @media (max-width: 600px) {
+            .carousel-container {
+                width: 200px;
+                height: 280px;
+                --tz: 350px;
+            }
+            .carousel-shifted {
+                transform: translateY(-25vh) scale(0.75);
+            }
+        }
+
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            /* Se inicia con el front mirando a 0deg y trasladado atrás */
+            transform: translateZ(calc(var(--tz) * -1)) rotateY(0deg);
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        /* Calculamos la rotación para 11 elementos (360 / 11 ≈ 32.7 deg) */
+        .carousel-item:nth-child(1) { transform: rotateY(0deg) translateZ(var(--tz)); }
+        .carousel-item:nth-child(2) { transform: rotateY(32.7deg) translateZ(var(--tz)); }
+        .carousel-item:nth-child(3) { transform: rotateY(65.4deg) translateZ(var(--tz)); }
+        .carousel-item:nth-child(4) { transform: rotateY(98.1deg) translateZ(var(--tz)); }
+        .carousel-item:nth-child(5) { transform: rotateY(130.9deg) translateZ(var(--tz)); }
+        .carousel-item:nth-child(6) { transform: rotateY(163.6deg) translateZ(var(--tz)); }
+        .carousel-item:nth-child(7) { transform: rotateY(196.3deg) translateZ(var(--tz)); }
+        .carousel-item:nth-child(8) { transform: rotateY(229.1deg) translateZ(var(--tz)); }
+        .carousel-item:nth-child(9) { transform: rotateY(261.8deg) translateZ(var(--tz)); }
+        .carousel-item:nth-child(10) { transform: rotateY(294.5deg) translateZ(var(--tz)); }
+        .carousel-item:nth-child(11) { transform: rotateY(327.2deg) translateZ(var(--tz)); }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .carousel-item.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-sizing: border-box;
+        }
+
+        .card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #2a2a2a;
+            transition: transform 0.3s ease;
+            pointer-events: none; /* Para no interrumpir drag */
+        }
+
+        .carousel-item:hover .card-front img {
+            transform: scale(1.05);
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #1b1633, #0f1936);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* --- CONSTELACIONES EN EL FONDO --- */
+        #constellation-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 5; /* Por encima de las estrellas pero debajo del carrusel (z-index: 15) */
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, background-image 1s ease-in-out;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 60%; /* Tamaño de la constelación en el cielo */
+        }
+        
+        @media (max-width: 600px) {
+            #constellation-bg {
+                background-size: 90%;
+            }
+        }
+
+        #constellation-bg.show-aries {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="70" r="1.5" fill="white" filter="blur(1px)"/><circle cx="50" cy="50" r="1.5" fill="white"/><circle cx="70" cy="60" r="1.5" fill="white"/><circle cx="90" cy="30" r="2" fill="white" filter="drop-shadow(0 0 5px white)"/><polyline points="20,70 50,50 70,60 90,30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/></svg>');
+            opacity: 0.6;
+        }
+        
+        #constellation-bg.show-taurus {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="1.5" fill="white"/><circle cx="40" cy="50" r="1.5" fill="white"/><circle cx="60" cy="50" r="2" fill="white" filter="blur(1px)"/><circle cx="80" cy="30" r="1.5" fill="white"/><circle cx="50" cy="80" r="1.5" fill="white"/><polyline points="20,30 40,50 50,80 60,50 80,30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/><polyline points="40,50 60,50" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/></svg>');
+            opacity: 0.6;
+        }
+
+        #constellation-bg.show-gemini {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="30" cy="20" r="1.5" fill="white" filter="blur(1px)"/><circle cx="70" cy="25" r="1.5" fill="white"/><circle cx="25" cy="50" r="1.5" fill="white"/><circle cx="65" cy="55" r="1.5" fill="white"/><circle cx="20" cy="80" r="1.5" fill="white"/><circle cx="60" cy="85" r="1.5" fill="white"/><polyline points="30,20 25,50 20,80" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/><polyline points="70,25 65,55 60,85" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/><polyline points="30,20 70,25" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/><polyline points="20,80 60,85" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/></svg>');
+            opacity: 0.6;
+        }
+
+        #constellation-bg.show-cancer {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="30" cy="80" r="1.5" fill="white"/><circle cx="50" cy="50" r="1.5" fill="white"/><circle cx="40" cy="30" r="2" fill="white" filter="blur(1px)"/><circle cx="70" cy="20" r="1.5" fill="white"/><polyline points="30,80 50,50 40,30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/><polyline points="50,50 70,20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/></svg>');
+            opacity: 0.6;
+        }
+
+        .constellation-date {
+            font-size: 0.9rem;
+            color: #ffb3d9;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        /* --- BOTÓN ESTELAR (Celebremos juntos) --- */
+        #celebrate-btn {
+            display: none; 
+            opacity: 0;
+            position: absolute;
+            bottom: 30px;
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #fff;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 30px #ffb3d9;
+            animation: pulse-stellar 2s infinite, float-up 1s forwards ease-out;
+            z-index: 20;
+            outline: none;
+            transition: opacity 0.5s;
+        }
+        
+        .celebrate-hidden {
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+
+        @keyframes pulse-stellar {
+            0% { transform: scale(1); text-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 30px #ffb3d9; }
+            50% { transform: scale(1.05); text-shadow: 0 0 25px rgba(255,255,255,1), 0 0 45px #66ccff; }
+            100% { transform: scale(1); text-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 30px #ffb3d9; }
+        }
+        
+        @keyframes float-up {
+            from { bottom: -50px; opacity: 0; }
+            to { bottom: 30px; opacity: 1; }
+        }
+
+        /* --- FASE 3: Formulario/Opciones --- */
+        #phase3 {
+            display: none;
+            opacity: 0;
+            position: absolute;
+            bottom: 5vh;
+            width: 100%;
+            max-width: 600px;
+            flex-direction: column;
+            align-items: center;
+            z-index: 30;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .question-box {
+            background: rgba(20, 20, 40, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            width: 90%;
+            backdrop-filter: blur(12px);
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            animation: slide-up 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .question-box:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes slide-up {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-box h3 {
+            font-family: 'Playfair Display', serif;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            color: #ffb3d9;
+            text-shadow: 0 0 10px rgba(255,179,217,0.4);
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn:hover, .option-btn.selected {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(255,255,255,0.4);
+            border-color: #fff;
+        }
+        
+        /* Destellos mágicos para el clic */
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white, 0 0 20px #ffb3d9, 0 0 30px #66ccff;
+            animation: sparkle-anim 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        @keyframes sparkle-anim {
+            0% { transform: scale(0) translateY(0); opacity: 1; }
+            50% { transform: scale(1.5) translateY(-30px); opacity: 0.9; }
+            100% { transform: scale(0) translateY(-60px); opacity: 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Fondos estrellados -->
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <!-- Contenedor del fondo de la constelación -->
+    <div id="constellation-bg"></div>
+
+    <div id="content-container">
+        <!-- Fase 1: Texto y botón de entrada -->
+        <div id="phase1">
+            <h1 class="floating-text">
+                hola mi amorcito, hoy es ya un mes desde que pude decirte cuanto te queria y sobre todo pedirte estar
+                conmigo por mucho tiempo mas, dale al boton para ver la magia
+            </h1>
+            <button class="magic-btn" onclick="showMagic(event)">(presioname)</button>
+        </div>
+    </div>
+
+    <!-- Fase 2: Carrusel 3D Mágico -->
+    <div id="phase2">
+        <h2 class="title-great-vibes" id="main-title">Feliz Aniversario</h2>
+
+        <div class="carousel-container" id="carousel-container">
+            <div class="carousel" id="carousel">
+        <!-- Foto 1: 27 de junio - Cáncer -->
+                <div class="carousel-item" onclick="flipCard(this, 'cancer')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="recursos/cita1.jpeg" alt="Foto 1" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'#333\'/><text x=\'50%\' y=\'50%\' font-family=\'Playfair Display\' font-size=\'24\' fill=\'white\' text-anchor=\'middle\' dy=\'.3em\'>Foto 1</text></svg>'">
+                        </div>
+                        <div class="card-back">
+                            <div class="constellation-date">27 de Junio</div>
+                            <p>Escribe tu mensaje para la foto 1 aquí...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Foto 2: 27 de junio - Cáncer -->
+                <div class="carousel-item" onclick="flipCard(this, 'cancer')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="recursos/cita2.jpeg" alt="Foto 2" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'#333\'/><text x=\'50%\' y=\'50%\' font-family=\'Playfair Display\' font-size=\'24\' fill=\'white\' text-anchor=\'middle\' dy=\'.3em\'>Foto 2</text></svg>'">
+                        </div>
+                        <div class="card-back">
+                            <div class="constellation-date">27 de Junio</div>
+                            <p>Escribe tu mensaje para la foto 2 aquí...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Foto 3: 4 de junio - Géminis -->
+                <div class="carousel-item" onclick="flipCard(this, 'gemini')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="recursos/cita3.jpeg" alt="Foto 3" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'#333\'/><text x=\'50%\' y=\'50%\' font-family=\'Playfair Display\' font-size=\'24\' fill=\'white\' text-anchor=\'middle\' dy=\'.3em\'>Foto 3</text></svg>'">
+                        </div>
+                        <div class="card-back">
+                            <div class="constellation-date">4 de Junio</div>
+                            <p>Escribe tu mensaje para la foto 3 aquí...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Foto 4: 4 de junio - Géminis -->
+                <div class="carousel-item" onclick="flipCard(this, 'gemini')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="recursos/cita4.jpeg" alt="Foto 4" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'#333\'/><text x=\'50%\' y=\'50%\' font-family=\'Playfair Display\' font-size=\'24\' fill=\'white\' text-anchor=\'middle\' dy=\'.3em\'>Foto 4</text></svg>'">
+                        </div>
+                        <div class="card-back">
+                            <div class="constellation-date">4 de Junio</div>
+                            <p>Escribe tu mensaje para la foto 4 aquí...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Foto 5: 2 de mayo - Tauro -->
+                <div class="carousel-item" onclick="flipCard(this, 'taurus')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="recursos/cita5.jpeg" alt="Foto 5" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'#333\'/><text x=\'50%\' y=\'50%\' font-family=\'Playfair Display\' font-size=\'24\' fill=\'white\' text-anchor=\'middle\' dy=\'.3em\'>Foto 5</text></svg>'">
+                        </div>
+                        <div class="card-back">
+                            <div class="constellation-date">2 de Mayo</div>
+                            <p>Escribe tu mensaje para la foto 5 aquí...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Foto 6: 13 de junio - Géminis -->
+                <div class="carousel-item" onclick="flipCard(this, 'gemini')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="recursos/cita6.jpeg" alt="Foto 6" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'#333\'/><text x=\'50%\' y=\'50%\' font-family=\'Playfair Display\' font-size=\'24\' fill=\'white\' text-anchor=\'middle\' dy=\'.3em\'>Foto 6</text></svg>'">
+                        </div>
+                        <div class="card-back">
+                            <div class="constellation-date">13 de Junio</div>
+                            <p>Escribe tu mensaje para la foto 6 aquí...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Foto 7: 4 de julio - Cáncer -->
+                <div class="carousel-item" onclick="flipCard(this, 'cancer')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="recursos/cita7.jpeg" alt="Foto 7" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'#333\'/><text x=\'50%\' y=\'50%\' font-family=\'Playfair Display\' font-size=\'24\' fill=\'white\' text-anchor=\'middle\' dy=\'.3em\'>Foto 7</text></svg>'">
+                        </div>
+                        <div class="card-back">
+                            <div class="constellation-date">4 de Julio</div>
+                            <p>Escribe tu mensaje para la foto 7 aquí...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Foto 8: 25 de mayo - Géminis -->
+                <div class="carousel-item" onclick="flipCard(this, 'gemini')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="recursos/cita8.jpeg" alt="Foto 8" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'#333\'/><text x=\'50%\' y=\'50%\' font-family=\'Playfair Display\' font-size=\'24\' fill=\'white\' text-anchor=\'middle\' dy=\'.3em\'>Foto 8</text></svg>'">
+                        </div>
+                        <div class="card-back">
+                            <div class="constellation-date">25 de Mayo</div>
+                            <p>Escribe tu mensaje para la foto 8 aquí...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Foto 9: 25 de mayo - Géminis -->
+                <div class="carousel-item" onclick="flipCard(this, 'gemini')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="recursos/cita9.jpeg" alt="Foto 9" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'#333\'/><text x=\'50%\' y=\'50%\' font-family=\'Playfair Display\' font-size=\'24\' fill=\'white\' text-anchor=\'middle\' dy=\'.3em\'>Foto 9</text></svg>'">
+                        </div>
+                        <div class="card-back">
+                            <div class="constellation-date">25 de Mayo</div>
+                            <p>Escribe tu mensaje para la foto 9 aquí...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Foto 10: 15 de abril - Aries -->
+                <div class="carousel-item" onclick="flipCard(this, 'aries')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="recursos/cita10.jpeg" alt="Foto 10" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'#333\'/><text x=\'50%\' y=\'50%\' font-family=\'Playfair Display\' font-size=\'24\' fill=\'white\' text-anchor=\'middle\' dy=\'.3em\'>Foto 10</text></svg>'">
+                        </div>
+                        <div class="card-back">
+                            <div class="constellation-date">15 de Abril</div>
+                            <p>Escribe tu mensaje para la foto 10 aquí...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Foto 11: 25 de mayo - Géminis -->
+                <div class="carousel-item" onclick="flipCard(this, 'gemini')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="recursos/cita11.jpeg" alt="Foto 11" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'#333\'/><text x=\'50%\' y=\'50%\' font-family=\'Playfair Display\' font-size=\'24\' fill=\'white\' text-anchor=\'middle\' dy=\'.3em\'>Foto 11</text></svg>'">
+                        </div>
+                        <div class="card-back">
+                            <div class="constellation-date">25 de Mayo</div>
+                            <p>Escribe tu mensaje para la foto 11 aquí...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botón que aparece al voltear todas las fotos -->
+        <button id="celebrate-btn" onclick="startPhase3()">celebremos juntos!</button>
+    </div>
+
+    <!-- Fase 3: Preguntas -->
+    <div id="phase3">
+        <div class="question-box">
+            <h3>¿Qué quieres comer?</h3>
+            <!-- Cambia estas opciones manualmente -->
+            <button class="option-btn" onclick="selectOption(this)">Opción de comida 1 (Ej. Sushi)</button>
+            <button class="option-btn" onclick="selectOption(this)">Opción de comida 2 (Ej. Pizza)</button>
+            <button class="option-btn" onclick="selectOption(this)">Opción de comida 3 (Ej. Tacos)</button>
+        </div>
+        
+        <div class="question-box">
+            <h3>¿Qué tan emocionada estás?</h3>
+            <button class="option-btn" onclick="selectOption(this)">Muchísimo ❤️</button>
+            <button class="option-btn" onclick="selectOption(this)">¡Demasiado! ✨</button>
+            <button class="option-btn" onclick="selectOption(this)">No puedo esperar más 🥰</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. Utilidades Mágicas ---
+        function createSparkles(x, y, amount = 20) {
+            for (let i = 0; i < amount; i++) {
+                let sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+
+                let spreadX = (Math.random() - 0.5) * 150;
+                let spreadY = (Math.random() - 0.5) * 150;
+
+                sparkle.style.left = (x + spreadX) + 'px';
+                sparkle.style.top = (y + spreadY) + 'px';
+
+                document.body.appendChild(sparkle);
+
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1000);
+            }
+        }
+
+        setInterval(() => {
+            if (document.visibilityState === 'visible') {
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+                createSparkles(x, y, 3);
+            }
+        }, 4000);
+
+
+        // --- 2. Transición Fase 1 a Fase 2 ---
+        let interactiveMode = false;
+        
+        function showMagic(event) {
+            createSparkles(event.clientX, event.clientY, 30);
+
+            const phase1 = document.getElementById('phase1');
+            const phase2 = document.getElementById('phase2');
+
+            phase1.style.opacity = '0';
+            phase1.style.transform = 'scale(0.9)';
+
+            setTimeout(() => {
+                phase1.style.display = 'none';
+                phase2.style.display = 'flex';
+                
+                setTimeout(() => {
+                    phase2.style.opacity = '1';
+                    interactiveMode = true;
+                    // Iniciar la animación iterativa del carrusel basado en cursor
+                    requestAnimationFrame(animateCarousel);
+                }, 50);
+
+            }, 1500);
+        }
+
+
+        // --- 3. Rotación de Carrusel Controlada por Mouse / Touch ---
+        let currentRotation = 0;
+        let mouseX = window.innerWidth / 2;
+        let isTouching = false;
+        let lastTouchX = 0;
+
+        // Rastreo de Mouse (Desktop)
+        document.addEventListener('mousemove', (e) => {
+            if (!isTouching) {
+                mouseX = e.clientX;
+            }
+        });
+
+        // Rastreo de Toque (Mobile) - Rotación por Arrastre
+        document.addEventListener('touchstart', (e) => {
+            isTouching = true;
+            lastTouchX = e.touches[0].clientX;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+            if (interactiveMode) {
+                const touchX = e.touches[0].clientX;
+                const deltaX = touchX - lastTouchX;
+                // Sensibilidad de arrastre (inversa para que siga el dedo)
+                currentRotation += deltaX * 0.5; 
+                lastTouchX = touchX;
+                updateCarouselTransform();
+            }
+        }, { passive: true });
+
+        function updateCarouselTransform() {
+            const carousel = document.getElementById('carousel');
+            if (carousel) {
+                carousel.style.transform = `translateZ(calc(var(--tz) * -1)) rotateY(${currentRotation}deg)`;
+            }
+        }
+
+        // Bucle de animación para rotación continua hacia la dirección del mouse (Solo Mouse)
+        function animateCarousel() {
+            if (interactiveMode && !isTouching) {
+                const centerX = window.innerWidth / 2;
+                const distance = mouseX - centerX;
+                // Velocidad basada en qué tan lejos del centro está el cursor
+                const speed = distance / 150; 
+                
+                // Si movemos el mouse a la izquierda, la velocidad es negativa y el carrusel gira al revés, etc.
+                currentRotation -= speed; 
+                updateCarouselTransform();
+            }
+            requestAnimationFrame(animateCarousel);
+        }
+
+
+        // --- 4. Lógica de Cartas Volteadas ---
+        let flippedCards = new Set();
+        let phase3Unlocked = false;
+
+        function flipCard(card, constellation) {
+            card.classList.toggle('flipped');
+            const bg = document.getElementById('constellation-bg');
+            
+            if (card.classList.contains('flipped')) {
+                flippedCards.add(card);
+                // Iluminar la constelación en el fondo
+                bg.className = ''; // Limpiar anteriores
+                void bg.offsetWidth; // Reflow
+                bg.classList.add('show-' + constellation);
+            } else {
+                flippedCards.delete(card);
+                // Si la cerramos, apagamos la constelación
+                bg.className = '';
+            }
+            
+            // Si las 11 fotos están volteadas y no se ha desbloqueado la fase 3 aún
+            if (flippedCards.size === 11 && !phase3Unlocked) {
+                phase3Unlocked = true;
+                const btn = document.getElementById('celebrate-btn');
+                btn.style.display = 'block';
+                // Forzar reflow para animación CSS
+                void btn.offsetWidth;
+                btn.style.opacity = '1';
+            }
+        }
+
+
+        // --- 5. Transición Fase 2 a Fase 3 ---
+        function startPhase3() {
+            const btn = document.getElementById('celebrate-btn');
+            btn.classList.add('celebrate-hidden');
+            
+            // Desplazar el carrusel y título hacia arriba
+            const carouselContainer = document.getElementById('carousel-container');
+            const mainTitle = document.getElementById('main-title');
+            carouselContainer.classList.add('carousel-shifted');
+            mainTitle.style.transition = 'transform 1.5s ease-in-out';
+            mainTitle.style.transform = 'translateY(-20vh) scale(0.8)';
+            
+            // Mostrar la Fase 3 abajo
+            const phase3 = document.getElementById('phase3');
+            phase3.style.display = 'flex';
+            setTimeout(() => {
+                phase3.style.opacity = '1';
+            }, 500);
+        }
+
+        // Interacción simple para los botones de las opciones
+        function selectOption(btn) {
+            // Quitar clase selected a los hermanos
+            const siblings = btn.parentElement.querySelectorAll('.option-btn');
+            siblings.forEach(s => s.classList.remove('selected'));
+            
+            // Añadir al clickeado
+            btn.classList.add('selected');
+            btn.style.background = 'rgba(255, 255, 255, 0.4)'; // feedback visual directo
+        }
+    </script>
+</body>
+
+</html>
